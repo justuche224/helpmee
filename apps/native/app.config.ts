@@ -73,8 +73,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   extra: {
     router: {},
     eas: {
-      projectId: "b192c2cb-6e88-4107-bca3-fa00f787904d",
+      projectId: "01996631-0ecb-4aa4-bd67-6c34ce31ca3a",
     },
   },
-  owner: "helpmee",
+  owner: "ominisolutions",
 });
