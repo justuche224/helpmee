@@ -1,0 +1,8 @@
+{
+  "platformParentId": 1,
+  "platformIncomingId": 2,
+  "pendingPayoutsId": 3,
+  "platformOperationalId": 4,
+  "feesAccountId": 5,
+  "providerFloatId": 6
+}
