@@ -76,5 +76,5 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       projectId: "01996631-0ecb-4aa4-bd67-6c34ce31ca3a",
     },
   },
-  owner: "ominisolutions",
+  owner: "ominisolutionss-organization",
 });
