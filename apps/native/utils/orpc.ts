@@ -14,8 +14,14 @@ export const queryClient = new QueryClient({
   }),
 });
 
+const isProd = process.env.NODE_ENV === "production";
+const serverIp = process.env.EXPO_PUBLIC_SERVER_IP;
+const port = process.env.EXPO_PUBLIC_SERVER_PORT;
+
+const baseURL = isProd ? process.env.EXPO_PUBLIC_SERVER_URL : `http://${serverIp}:${port}`;
+
 export const link = new RPCLink({
-  url: `${process.env.EXPO_PUBLIC_SERVER_URL}/rpc`,
+  url: `${baseURL}/rpc`,
   async headers() {
     const headers = new Map<string, string>();
 

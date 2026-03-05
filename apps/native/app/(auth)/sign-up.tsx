@@ -20,6 +20,12 @@ import { useGradualAnimation } from "@/hooks/use-gradual-animation";
 import { authClient } from "@/lib/auth-client";
 import { Container } from "@/components/container";
 
+const isProd = process.env.NODE_ENV === "production";
+const serverIp = process.env.EXPO_PUBLIC_SERVER_IP;
+const port = process.env.EXPO_PUBLIC_SERVER_PORT;
+
+const baseURL = isProd ? process.env.EXPO_PUBLIC_SERVER_URL : `http://${serverIp}:${port}`;
+
 const SignUp = () => {
   const { height } = useGradualAnimation();
   const keyboardPadding = useAnimatedStyle(() => {
@@ -74,7 +80,7 @@ const SignUp = () => {
         email: form.email,
         password: form.password,
         name: form.name,
-        callbackURL: `${process.env.EXPO_PUBLIC_SERVER_URL}/v1/auth/email-verificatied`,
+        callbackURL: `${baseURL}/v1/auth/email-verificatied`,
       });
       const { data: res, error } = data;
       if (error) {

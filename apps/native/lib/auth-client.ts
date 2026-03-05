@@ -12,8 +12,14 @@ export const getStoredSessionToken = async () => {
   return await SecureStore.getItemAsync("helpmee_session_token");
 };
 
+const isProd = process.env.NODE_ENV === "production";
+const serverIp = process.env.EXPO_PUBLIC_SERVER_IP;
+const port = process.env.EXPO_PUBLIC_SERVER_PORT;
+
+const baseURL = isProd ? process.env.EXPO_PUBLIC_SERVER_URL : `http://${serverIp}:${port}`;
+
 export const authClient = createAuthClient({
-  baseURL: process.env.EXPO_PUBLIC_SERVER_URL,
+  baseURL,
   plugins: [
     expoClient({
       scheme: "helpmee",
