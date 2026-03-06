@@ -71,6 +71,7 @@ const seedProviders = async () => {
       }
     });
     console.log("Providers seeded successfully.");
+    process.exit(0);
   } catch (error) {
     console.log("Failed to seed providers");
     console.error(error);

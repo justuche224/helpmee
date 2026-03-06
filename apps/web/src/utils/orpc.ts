@@ -6,36 +6,44 @@ import { toast } from "sonner";
 import type { AppRouterClient } from "../../../server/src/routers/index";
 
 export const queryClient = new QueryClient({
-	queryCache: new QueryCache({
-		onError: (error) => {
-			toast.error(`Error: ${error.message}`, {
-				action: {
-					label: "retry",
-					onClick: () => {
-						queryClient.invalidateQueries();
-					},
-				},
-			});
-		},
-	}),
+  queryCache: new QueryCache({
+    onError: (error) => {
+      toast.error(`Error: ${error.message}`, {
+        action: {
+          label: "retry",
+          onClick: () => {
+            queryClient.invalidateQueries();
+          },
+        },
+      });
+    },
+  }),
 });
 
-export const link = new RPCLink({
-	url: `${process.env.NEXT_PUBLIC_SERVER_URL}/rpc`,
-	fetch(url, options) {
-		return fetch(url, {
-			...options,
-			credentials: "include",
-		});
-	},
-	headers: async () => {
-		if (typeof window !== "undefined") {
-			return {};
-		}
+const isProd = process.env.NODE_ENV === "production";
+const serverIp = process.env.NEXT_PUBLIC_SERVER_IP;
+const port = process.env.NEXT_PUBLIC_SERVER_PORT;
 
-		const { headers } = await import("next/headers");
-		return Object.fromEntries(await headers());
-	},
+const baseURL = isProd
+  ? process.env.NEXT_PUBLIC_SERVER_URL
+  : `http://${serverIp}:${port}`;
+
+export const link = new RPCLink({
+  url: `${baseURL}/rpc`,
+  fetch(url, options) {
+    return fetch(url, {
+      ...options,
+      credentials: "include",
+    });
+  },
+  headers: async () => {
+    if (typeof window !== "undefined") {
+      return {};
+    }
+
+    const { headers } = await import("next/headers");
+    return Object.fromEntries(await headers());
+  },
 });
 
 export const client: AppRouterClient = createORPCClient(link);

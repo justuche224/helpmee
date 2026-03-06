@@ -1,8 +1,8 @@
 {
-  "platformParentId": 6,
-  "platformIncomingId": 7,
-  "pendingPayoutsId": 8,
-  "platformOperationalId": 9,
-  "feesAccountId": 10,
-  "providerFloatId": 11
+  "platformParentId": 5,
+  "platformIncomingId": 6,
+  "pendingPayoutsId": 7,
+  "platformOperationalId": 8,
+  "feesAccountId": 9,
+  "providerFloatId": 10
 }

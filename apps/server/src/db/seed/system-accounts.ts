@@ -111,6 +111,7 @@ async function bootstrap() {
   const accountsMap = await seedSystemAccounts();
   console.log("System accounts ready:", accountsMap);
   Bun.write("./accounts.json", JSON.stringify(accountsMap, null, 2));
+  process.exit(0);
 }
 
 bootstrap().catch((err) => {
